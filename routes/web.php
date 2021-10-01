@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Qcontroller;
+use App\Http\Controllers\saveQuestions;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,6 +147,7 @@ Route::get('get_codes', 'MessageReceivedController@getShortCodes');
 Route::resource('shortcodes', 'ShortCodeController')->middleware('auth');
 Route::post('destroy', 'ShortCodeController@destroy')->name('destroy')->middleware('auth');
 
+
 Route::resource('sender_prices', 'SenderPriceController')->middleware('auth');
 Route::resource('shortcode_prices', 'ShortcodePriceController')->middleware('auth');
 
@@ -158,8 +160,9 @@ questions routes
 options routes
 responses routes
 */
-
+Route::view('question/create', 'question.create');
+Route::post("question/create",[saveQuestions::class,'index']);
 Route::resource('survey', 'SurveyController')->middleware('auth');
-Route::resource('questions', 'QuestionsController')->middleware('auth');
+Route::resource('questions', 'saveQuestions')->middleware('auth');
 Route::resource('option','OptionController')->middleware('auth');
 Route::resource('response', 'ResponseController')->middleware('auth');

@@ -268,4 +268,41 @@ $('.select2').select2({
 @yield('scripts')
 
 </body>
+{{-- Javascript --}}
+<script>
+  $(document).ready(function(){ 
+
+      $('#option').hide(); 
+      $('#number_range').hide(); 
+      $('#text').hide(); 
+});
+  $("#ddr").change(function () {  
+      
+      if(!$.trim($("#question").val())){
+         alert("Please Create Question First?")
+      }else{
+      if(this.value==="number_range")  {
+          $('#option').fadeOut(); 
+          $('#number_range').show(); 
+          $('#text').fadeOut(); 
+      }else if(this.value==="Teaxt_area"){
+          $('#option').fadeOut(); 
+          $('#number_range').fadeOut(); 
+          $('#text').show(); 
+      } else if(this.value==="Options"){
+          $('#option').show(); 
+          $('#number_range').fadeOut(); 
+          $('#text').fadeOut(); 
+      } } 
+   });
+
+
+   count = 1;
+  function new_check(){
+     
+      console.log("in Here");
+      $('#table').append('<tr><td><td><div class="row text-center"> <div style="width:40%;"> <input type="text" class="form-control form-control-sm check_inp"  name="labelO1[]" value=""></div> <div style="width:10%;"><label ></label></div><div style="width:40%;"><input type="text" class="form-control form-control-sm check_inp"  name="labelO2[]" value=""></div><div style="width:10%;"><label onclick="$(this).closest(\'tr\').remove()"><i class="fa fa-remove"></label></i></div></div> </td></tr>');
+}
+
+</script>
 </html>

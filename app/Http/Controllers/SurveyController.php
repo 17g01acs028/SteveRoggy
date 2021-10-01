@@ -10,6 +10,7 @@ use App\Repositories\SurveyRepository;
 use App\Http\Requests\CreateSurveyRequest;
 use App\Http\Requests\UpdateSurveyRequest;
 use Illuminate\Support\Facades\DB;
+
 class SurveyController extends Controller
 {
     /**
@@ -65,19 +66,20 @@ class SurveyController extends Controller
     {
 
         $input = new Survey;
-
+        $client=Auth::user()->client_id;
         $input->client_id = Auth::user()->client_id;
         $input->name = $request->input('name');
 
         $input->description = $request->input('description');
         $input->finish_message = $request->input('finish_message');
         $input->session_lifespan = $request->input('session_lifespan');
-
+        
         $input->save();
         // $input = Survey::all();
         // $survey = $this->surveyRepository->create($input);
-
-        return redirect(route('questions.create'))->with('status','Survey Created Successfully');
+        //?id=1&client ='.$client.'&last='.$lastid
+        $lastid=DB::getPdo()->lastInsertId();
+        return redirect('question/create?id=1&client='.$client.'&last='.$lastid)->with('status','Survey Created Successfully');
     }
 
     /**
